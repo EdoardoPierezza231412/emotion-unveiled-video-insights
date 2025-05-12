@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { history, sliders, chartBar } from "lucide-react";
+import { History, Sliders, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -123,7 +123,7 @@ const History = () => {
           </div>
           
           <Button onClick={handleExportAll} className="flex items-center gap-2">
-            <history className="h-4 w-4" />
+            <History className="h-4 w-4" />
             Export All As CSV
           </Button>
         </div>
@@ -208,11 +208,11 @@ const History = () => {
                 <h3 className="text-lg font-medium mb-2">Analysis Tools</h3>
                 <div className="grid grid-cols-1 gap-2">
                   <Button variant="outline" className="justify-start">
-                    <sliders className="mr-2 h-4 w-4" />
+                    <Sliders className="mr-2 h-4 w-4" />
                     Filter Results
                   </Button>
                   <Button variant="outline" className="justify-start">
-                    <chartBar className="mr-2 h-4 w-4" />
+                    <BarChart className="mr-2 h-4 w-4" />
                     View Analytics
                   </Button>
                 </div>
