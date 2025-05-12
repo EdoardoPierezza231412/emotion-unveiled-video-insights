@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { History, Sliders, BarChart } from "lucide-react";
+import { History as HistoryIcon, Sliders, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -84,7 +84,7 @@ const mockPredictions: EmotionPrediction[] = [
   },
 ];
 
-const History = () => {
+const PredictionHistory = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("all");
   
@@ -123,7 +123,7 @@ const History = () => {
           </div>
           
           <Button onClick={handleExportAll} className="flex items-center gap-2">
-            <History className="h-4 w-4" />
+            <HistoryIcon className="h-4 w-4" />
             Export All As CSV
           </Button>
         </div>
@@ -264,4 +264,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default PredictionHistory;
