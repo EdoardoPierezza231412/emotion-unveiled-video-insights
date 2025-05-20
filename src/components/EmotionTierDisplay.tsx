@@ -50,80 +50,92 @@ const EmotionTierDisplay: React.FC<EmotionTierDisplayProps> = ({ plan }) => {
   const hiddenCount = emotions.length - displayCount;
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-medium">Available Emotions</h3>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <Info className="h-4 w-4 text-muted-foreground" />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-xs">
-                {plan === "basic" ? "Basic emotions only" : 
-                 plan === "plus" ? "25+ advanced emotions" : 
-                 "Complete set of 30+ emotions"}
-              </p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-
-      <div className="flex flex-wrap gap-2">
-        {displayedEmotions.map((emotion) => (
-          <Badge 
-            key={emotion} 
-            variant="outline"
-            className="flex items-center gap-1 bg-card hover:bg-accent transition-colors"
-          >
-            <span>{getEmotionIcon(emotion)}</span>
-            <span className="capitalize">{emotion}</span>
-          </Badge>
-        ))}
-        
-        {hiddenCount > 0 && (
+    <Card className="overflow-hidden border border-slate-800/60 bg-black/20 backdrop-blur-sm shadow-lg">
+      <CardContent className="p-6 space-y-5">
+        <div className="flex justify-between items-center">
+          <h3 className="text-sm font-medium bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            Available Emotions
+          </h3>
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger asChild>
-                <Badge 
-                  variant="outline"
-                  className="bg-muted/50 hover:bg-accent cursor-help transition-colors"
-                >
-                  +{hiddenCount} more
-                </Badge>
+              <TooltipTrigger>
+                <div className="rounded-full bg-slate-800/60 p-1.5 text-primary hover:bg-slate-700/60 transition-colors">
+                  <Info className="h-3.5 w-3.5" />
+                </div>
               </TooltipTrigger>
               <TooltipContent>
-                <div className="max-w-xs">
-                  <p className="text-xs mb-2">Additional emotions in this tier:</p>
-                  <div className="flex flex-wrap gap-1">
-                    {emotions.slice(displayCount).map((emotion) => (
-                      <Badge key={emotion} variant="outline" className="text-xs">
-                        {emotion}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
+                <p className="text-xs">
+                  {plan === "basic" ? "Basic emotions only" : 
+                  plan === "plus" ? "25+ advanced emotions" : 
+                  "Complete set of 30+ emotions"}
+                </p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-        )}
-      </div>
+        </div>
 
-      <div className="text-xs text-muted-foreground">
-        <p className="mb-1">
-          {plan === "basic" ? "Basic tier includes 7 fundamental emotions." : 
-           plan === "plus" ? "Creator tier provides 25+ advanced emotion categories." : 
-           "Enterprise tier offers our full suite of 30+ emotions with cultural context."}
-        </p>
-        
-        <p className="flex items-center gap-1">
-          <span className="font-mono bg-black/20 rounded px-1 py-0.5 text-[10px]">
-            {plan === "basic" ? "tiny" : plan === "plus" ? "medium" : "turbo"}
-          </span> 
-          transcription model
-        </p>
-      </div>
-    </div>
+        <div className="flex flex-wrap gap-2">
+          {displayedEmotions.map((emotion) => (
+            <Badge 
+              key={emotion} 
+              variant="outline"
+              className="flex items-center gap-1 bg-slate-900/60 border-slate-700/40 hover:bg-slate-800/60 transition-all duration-200 px-3 py-1"
+            >
+              <span>{getEmotionIcon(emotion)}</span>
+              <span className="capitalize">{emotion}</span>
+            </Badge>
+          ))}
+          
+          {hiddenCount > 0 && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Badge 
+                    variant="outline"
+                    className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/30 cursor-help transition-all duration-200"
+                  >
+                    +{hiddenCount} more
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div className="max-w-xs">
+                    <p className="text-xs mb-2">Additional emotions in this tier:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {emotions.slice(displayCount).map((emotion) => (
+                        <Badge key={emotion} variant="outline" className="text-xs bg-slate-800/60 border-slate-700/40">
+                          {emotion}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
+
+        <div className="text-xs text-muted-foreground">
+          <p className="mb-1">
+            {plan === "basic" ? "Basic tier includes 7 fundamental emotions." : 
+            plan === "plus" ? "Creator tier provides 25+ advanced emotion categories." : 
+            "Enterprise tier offers our full suite of 30+ emotions with cultural context."}
+          </p>
+          
+          <div className="flex items-center gap-1 mt-3">
+            <span className={`font-mono ${
+              plan === "basic" 
+                ? "bg-slate-800" 
+                : plan === "plus" 
+                ? "bg-primary/20 text-primary" 
+                : "bg-gradient-to-r from-primary/20 to-accent/20 text-accent"
+            } rounded px-1.5 py-0.5 text-[10px]`}>
+              {plan === "basic" ? "tiny" : plan === "plus" ? "medium" : "turbo"}
+            </span> 
+            <span>transcription model</span>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
