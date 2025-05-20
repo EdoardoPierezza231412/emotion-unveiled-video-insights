@@ -2,48 +2,41 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 
-type EmotionType = "joy" | "sadness" | "anger" | "fear" | "surprise" | "neutral" | "complex";
-
 interface EmotionBadgeProps {
-  emotion: EmotionType;
-  intensity?: number;
-  showIntensity?: boolean;
+  emotion: string;
+  intensity: number;
 }
 
-const EmotionBadge = ({ emotion, intensity = 50, showIntensity = true }: EmotionBadgeProps) => {
-  const getEmotionColor = (emotion: EmotionType) => {
+const EmotionBadge: React.FC<EmotionBadgeProps> = ({ emotion, intensity }) => {
+  const getColor = () => {
     switch (emotion) {
-      case "joy": return "bg-emotion-joy text-black";
-      case "sadness": return "bg-emotion-sadness text-white";
-      case "anger": return "bg-emotion-anger text-white";
-      case "fear": return "bg-emotion-fear text-white";
-      case "surprise": return "bg-emotion-surprise text-black";
-      case "neutral": return "bg-emotion-neutral text-white";
-      case "complex": return "bg-gradient-to-r from-primary to-accent text-white";
-      default: return "bg-muted text-muted-foreground";
-    }
-  };
-
-  const getEmotionIcon = (emotion: EmotionType) => {
-    switch (emotion) {
-      case "joy": return "😊";
-      case "sadness": return "😢";
-      case "anger": return "😠";
-      case "fear": return "😨";
-      case "surprise": return "😲";
-      case "neutral": return "😐";
-      case "complex": return "🔄";
-      default: return "❓";
+      case "joy":
+        return "bg-emotion-joy/20 text-emotion-joy border-emotion-joy/30";
+      case "sadness":
+        return "bg-emotion-sadness/20 text-emotion-sadness border-emotion-sadness/30";
+      case "anger":
+        return "bg-emotion-anger/20 text-emotion-anger border-emotion-anger/30";
+      case "fear":
+        return "bg-emotion-fear/20 text-emotion-fear border-emotion-fear/30";
+      case "surprise":
+        return "bg-emotion-surprise/20 text-emotion-surprise border-emotion-surprise/30";
+      case "neutral":
+        return "bg-emotion-neutral/20 text-emotion-neutral border-emotion-neutral/30";
+      case "complex":
+        return "bg-accent/20 text-accent border-accent/30";
+      default:
+        return "bg-secondary text-muted-foreground";
     }
   };
 
   return (
-    <Badge className={`${getEmotionColor(emotion)} font-normal`}>
-      <span className="mr-1">{getEmotionIcon(emotion)}</span>
-      <span className="capitalize">{emotion}</span>
-      {showIntensity && (
-        <span className="ml-1 opacity-80">{Math.round(intensity)}%</span>
-      )}
+    <Badge 
+      variant="outline"
+      className={`flex items-center gap-2 ${getColor()} py-2 px-3 rounded-md border`}
+    >
+      <span className="font-medium capitalize">{emotion}</span>
+      <div className="h-5 w-0.5 bg-border/50 mx-1" />
+      <span className="text-xs font-mono">{intensity}%</span>
     </Badge>
   );
 };

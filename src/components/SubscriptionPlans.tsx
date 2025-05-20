@@ -1,6 +1,6 @@
 
 import React from "react";
-import { CheckIcon, XIcon, StarIcon } from "lucide-react";
+import { Check, X, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,7 @@ const plans = [
     description: "Basic emotion analysis for personal use",
     features: [
       { name: "5 videos per month", included: true },
-      { name: "Basic emotions (7 categories)", included: true },
+      { name: "7 basic emotions", included: true },
       { name: "720p max resolution", included: true },
       { name: "5-minute video limit", included: true },
       { name: "English language only", included: true },
@@ -33,7 +33,7 @@ const plans = [
     description: "Advanced analysis for creators and professionals",
     features: [
       { name: "Unlimited videos", included: true },
-      { name: "Extended emotions (25+ categories)", included: true },
+      { name: "25+ emotion categories", included: true },
       { name: "4K resolution support", included: true },
       { name: "30-minute video limit", included: true },
       { name: "10 languages supported", included: true },
@@ -53,7 +53,7 @@ const plans = [
     description: "Complete solution for businesses and research",
     features: [
       { name: "Unlimited videos", included: true },
-      { name: "Full emotion spectrum (30+ labels)", included: true },
+      { name: "30+ emotion categories", included: true },
       { name: "8K resolution support", included: true },
       { name: "No video length limit", included: true },
       { name: "50+ languages supported", included: true },
@@ -74,48 +74,48 @@ const SubscriptionPlans = () => {
       {plans.map((plan) => (
         <Card 
           key={plan.name} 
-          className={`${
-            plan.popular 
-              ? "border-primary shadow-lg shadow-primary/10" 
-              : ""
-          } relative overflow-hidden`}
+          className={`glass-card rounded-xl relative ${
+            plan.popular ? "border-primary/30 ring-1 ring-primary/20" : "border-border"
+          }`}
         >
           {plan.popular && (
-            <div className="absolute top-0 right-0">
-              <Badge className="rounded-tl-none rounded-tr-none rounded-br-none bg-primary">
-                <StarIcon className="h-3 w-3 mr-1" /> Popular
+            <div className="absolute -top-3 -right-3">
+              <Badge className="bg-primary text-white flex items-center gap-1.5 py-1 px-2.5">
+                <Star className="h-3.5 w-3.5" /> Popular
               </Badge>
             </div>
           )}
           
           <CardHeader>
-            <CardTitle>
-              {plan.name}
-              <div className="mt-2 text-3xl font-bold">
+            <CardTitle className="flex flex-col gap-1">
+              <span>{plan.name}</span>
+              <div className="text-3xl font-medium flex items-baseline">
                 {plan.price}
-                <span className="text-sm text-muted-foreground font-normal ml-1">
+                <span className="text-sm text-muted-foreground ml-1.5">
                   {plan.period}
                 </span>
               </div>
             </CardTitle>
-            <CardDescription className="mt-2">{plan.description}</CardDescription>
+            <CardDescription className="mt-2 text-sm text-muted-foreground">
+              {plan.description}
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-1 text-sm mb-4">
+            <div className="space-y-1.5 text-sm mb-4">
               <div className="flex items-center gap-2">
-                <Badge variant="outline" className="font-mono">
+                <Badge variant="outline" className="font-mono text-xs bg-secondary/50">
                   {plan.transcriptionModel}
                 </Badge>
-                <span className="text-sm text-muted-foreground">transcription model</span>
+                <span className="text-xs text-muted-foreground">transcription model</span>
               </div>
             </div>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-sm">
               {plan.features.map((feature) => (
-                <li key={feature.name} className="flex items-start">
+                <li key={feature.name} className="flex items-center gap-3">
                   {feature.included ? (
-                    <CheckIcon className="h-5 w-5 text-primary mr-2 shrink-0" />
+                    <Check className="h-4 w-4 text-primary shrink-0" />
                   ) : (
-                    <XIcon className="h-5 w-5 text-muted-foreground/50 mr-2 shrink-0" />
+                    <X className="h-4 w-4 text-muted-foreground/50 shrink-0" />
                   )}
                   <span className={!feature.included ? "text-muted-foreground" : ""}>
                     {feature.name}

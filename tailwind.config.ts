@@ -19,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				heading: ['Inter', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -63,19 +67,14 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for our emotion analysis app
 				emotion: {
-					joy: "#FFD166",
-					anger: "#EF476F",
-					sadness: "#118AB2",
-					fear: "#073B4C",
-					surprise: "#06D6A0",
-					neutral: "#8A817C"
+					joy: "#7C69F3",
+					anger: "#EB5757",
+					sadness: "#56CCF2",
+					fear: "#444452",
+					surprise: "#6FCF97",
+					neutral: "#828282"
 				}
-			},
-			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				heading: ['Poppins', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -102,6 +101,14 @@ export default {
 				'pulse-light': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.7' }
+				},
+				'slide-up': {
+					'0%': { transform: 'translateY(10px)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'micro-bounce': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-2px)' }
 				}
 			},
 			animation: {
@@ -109,7 +116,9 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
 				'fade-out': 'fade-out 0.5s ease-out',
-				'pulse-light': 'pulse-light 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+				'pulse-light': 'pulse-light 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'slide-up': 'slide-up 0.3s ease-out',
+				'micro-bounce': 'micro-bounce 0.8s ease-in-out infinite'
 			}
 		}
 	},
