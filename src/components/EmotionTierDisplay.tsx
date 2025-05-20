@@ -50,7 +50,7 @@ const EmotionTierDisplay: React.FC<EmotionTierDisplayProps> = ({ plan }) => {
   const hiddenCount = emotions.length - displayCount;
 
   return (
-    <Card className="overflow-hidden border border-slate-800/60 bg-black/20 backdrop-blur-sm shadow-lg">
+    <Card className="overflow-hidden border-none bg-gradient-to-b from-black/80 to-black/40 backdrop-blur-lg shadow-xl">
       <CardContent className="p-6 space-y-5">
         <div className="flex justify-between items-center">
           <h3 className="text-sm font-medium bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -59,7 +59,7 @@ const EmotionTierDisplay: React.FC<EmotionTierDisplayProps> = ({ plan }) => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <div className="rounded-full bg-slate-800/60 p-1.5 text-primary hover:bg-slate-700/60 transition-colors">
+                <div className="rounded-full bg-white/5 p-1.5 text-primary hover:bg-white/10 transition-colors">
                   <Info className="h-3.5 w-3.5" />
                 </div>
               </TooltipTrigger>
@@ -79,7 +79,7 @@ const EmotionTierDisplay: React.FC<EmotionTierDisplayProps> = ({ plan }) => {
             <Badge 
               key={emotion} 
               variant="outline"
-              className="flex items-center gap-1 bg-slate-900/60 border-slate-700/40 hover:bg-slate-800/60 transition-all duration-200 px-3 py-1"
+              className="flex items-center gap-1 bg-black/50 border-white/10 hover:border-primary/50 hover:bg-black/70 transition-all duration-200 px-3 py-1"
             >
               <span>{getEmotionIcon(emotion)}</span>
               <span className="capitalize">{emotion}</span>
@@ -92,17 +92,17 @@ const EmotionTierDisplay: React.FC<EmotionTierDisplayProps> = ({ plan }) => {
                 <TooltipTrigger asChild>
                   <Badge 
                     variant="outline"
-                    className="bg-primary/10 hover:bg-primary/20 text-primary border-primary/30 cursor-help transition-all duration-200"
+                    className="bg-primary/20 hover:bg-primary/30 text-primary border-primary/30 cursor-help transition-all duration-200"
                   >
                     +{hiddenCount} more
                   </Badge>
                 </TooltipTrigger>
-                <TooltipContent>
-                  <div className="max-w-xs">
+                <TooltipContent className="w-64 max-w-xs">
+                  <div>
                     <p className="text-xs mb-2">Additional emotions in this tier:</p>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1.5">
                       {emotions.slice(displayCount).map((emotion) => (
-                        <Badge key={emotion} variant="outline" className="text-xs bg-slate-800/60 border-slate-700/40">
+                        <Badge key={emotion} variant="outline" className="text-xs bg-black/60 border-white/10">
                           {emotion}
                         </Badge>
                       ))}
@@ -124,10 +124,10 @@ const EmotionTierDisplay: React.FC<EmotionTierDisplayProps> = ({ plan }) => {
           <div className="flex items-center gap-1 mt-3">
             <span className={`font-mono ${
               plan === "basic" 
-                ? "bg-slate-800" 
+                ? "bg-black/50 border border-white/10" 
                 : plan === "plus" 
-                ? "bg-primary/20 text-primary" 
-                : "bg-gradient-to-r from-primary/20 to-accent/20 text-accent"
+                ? "bg-primary/20 text-primary border border-primary/30" 
+                : "bg-gradient-to-r from-primary/20 to-accent/20 text-accent border border-accent/30"
             } rounded px-1.5 py-0.5 text-[10px]`}>
               {plan === "basic" ? "tiny" : plan === "plus" ? "medium" : "turbo"}
             </span> 
