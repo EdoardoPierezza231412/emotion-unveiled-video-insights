@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { History as HistoryIcon, Sliders, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -226,7 +225,7 @@ const PredictionHistory = () => {
                       <div className="flex items-center gap-2">
                         <EmotionBadge
                           emotion={emotion as any}
-                          showIntensity={false}
+                          intensity={0}
                         />
                       </div>
                       <div className="flex items-center gap-2">
