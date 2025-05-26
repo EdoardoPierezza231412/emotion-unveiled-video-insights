@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import PlanFeatureComparison from "@/components/PlanFeatureComparison";
 import EmotionTierDisplay from "@/components/EmotionTierDisplay";
 
-const API = import.meta.env.VITE_API_BASE_URL || "http://194.171.191.226:3100";
+const API = import.meta.env.VITE_API_BASE_URL || "http://194.171.191.226:3100/docs";
 
 const planOptions = [
   { id: "basic", label: "Starter", price: "Free", model: "tiny" },
