@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Download, Youtube, Wand2, BarChart2, Loader2, Sparkles, ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -181,6 +182,7 @@ const Analysis = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-8">
+                  <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="space-y-3">
                       <Label htmlFor="youtube-url" className="text-base font-medium">YouTube Video URL</Label>
                       <div className="relative">
