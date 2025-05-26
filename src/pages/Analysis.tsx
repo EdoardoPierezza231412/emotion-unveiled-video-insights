@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   Download, Youtube, Wand2, BarChart2, Loader2, Sparkles, ArrowRight, CheckCircle
@@ -26,7 +27,7 @@ const planOptions = [
 
 const nextActions = (
   setTab: (val: string) => void,
-  download: () => voidz
+  download: () => void
 ) => [
   {
     title: "View Detailed Analytics",
