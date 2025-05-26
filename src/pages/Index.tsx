@@ -1,39 +1,51 @@
 
 import React from "react";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Sparkles, TrendingUp, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/layout/Navigation";
 import SubscriptionPlans from "@/components/SubscriptionPlans";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground relative">
-      {/* Subtle noise overlay for texture */}
-      <div className="noise-overlay"></div>
+    <div className="min-h-screen flex flex-col bg-background text-foreground relative overflow-hidden">
+      {/* Enhanced animated background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 right-[10%] w-96 h-96 rounded-full bg-gradient-to-br from-primary/20 via-accent/15 to-transparent filter blur-[120px] animate-pulse-light" />
+        <div className="absolute bottom-0 left-[5%] w-80 h-80 rounded-full bg-gradient-to-tr from-accent/20 via-primary/15 to-transparent filter blur-[100px] animate-float" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 filter blur-[80px] animate-glow" />
+      </div>
+      
+      <div className="noise-overlay opacity-30"></div>
       
       <Navigation />
       
-      <main className="flex-1">
+      <main className="flex-1 relative z-10">
         {/* Hero Section */}
-        <section className="py-16 md:py-24 relative">
-          {/* Background elements */}
-          <div className="absolute inset-0 z-0 opacity-20">
-            <div className="absolute top-0 right-[10%] w-64 h-64 rounded-full bg-primary/5 filter blur-[100px]" />
-            <div className="absolute bottom-0 left-[5%] w-72 h-72 rounded-full bg-accent/5 filter blur-[100px]" />
-          </div>
-          
+        <section className="py-20 md:py-32 relative">
           <div className="container px-4 md:px-6 relative z-10">
-            <div className="flex flex-col items-center text-center space-y-8 max-w-3xl mx-auto">
-              <div className="space-y-4">
-                <h1 className="text-3xl md:text-5xl font-medium tracking-tight">
-                  <span className="text-gradient animate-slide-up block">AI-Powered</span>
-                  <span className="animate-slide-up block">Emotion Analysis</span>
+            <div className="flex flex-col items-center text-center space-y-10 max-w-4xl mx-auto">
+              <div className="space-y-6">
+                <Badge className="bg-gradient-to-r from-primary/20 to-accent/20 text-primary border-primary/30 backdrop-blur-sm px-6 py-2 text-sm font-medium animate-fade-in">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  AI-Powered Emotion Intelligence
+                </Badge>
+                
+                <h1 className="text-4xl md:text-7xl font-bold tracking-tight animate-slide-up">
+                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-shimmer">
+                    Decode Human Emotions
+                  </span>
+                  <br />
+                  <span className="text-foreground">with AI Precision</span>
                 </h1>
-                <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto animate-slide-up">
-                  Detect and visualize emotional shifts in real-time with advanced AI processing and multilingual support.
+                
+                <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed animate-slide-up">
+                  Transform video content into actionable emotional insights. Our advanced AI analyzes facial expressions, 
+                  voice patterns, and linguistic cues to provide comprehensive emotion detection and analytics.
                 </p>
               </div>
 
@@ -41,40 +53,51 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   onClick={() => navigate("/analysis")} 
-                  className="bg-primary hover:opacity-90 transition-all group"
+                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-2xl hover:shadow-primary/25 transition-all duration-300 group px-8 py-4 text-lg"
                 >
-                  Analyze a Video 
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  Start Free Analysis
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="bg-secondary/50 border border-border hover:bg-secondary/80"
+                  className="glass-card border-primary/30 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 px-8 py-4 text-lg"
                 >
-                  <Play className="mr-2 h-4 w-4" />
+                  <Play className="mr-2 h-5 w-5" />
                   Watch Demo
                 </Button>
               </div>
               
-              {/* Emotion Visualization Preview */}
-              <div className="w-full max-w-2xl mx-auto mt-10 glass-card rounded-xl p-6 animate-float">
-                <h3 className="text-sm font-medium mb-4">Sample Emotion Analysis</h3>
-                <div className="space-y-3">
+              {/* Enhanced Emotion Visualization Preview */}
+              <div className="w-full max-w-3xl mx-auto mt-16 glass-panel rounded-2xl p-8 animate-float shadow-2xl border border-white/10">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-gradient">Live Emotion Analysis</h3>
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 animate-pulse">
+                    Real-time
+                  </Badge>
+                </div>
+                <div className="space-y-4">
                   {[
-                    { name: "Neutral", value: 65, color: "bg-emotion-neutral" },
-                    { name: "Joy", value: 42, color: "bg-emotion-joy" },
-                    { name: "Surprise", value: 28, color: "bg-emotion-surprise" },
-                    { name: "Sadness", value: 15, color: "bg-emotion-sadness" },
-                  ].map((emotion) => (
-                    <div key={emotion.name} className="space-y-1">
-                      <div className="flex justify-between text-sm">
-                        <span>{emotion.name}</span>
-                        <span className="text-muted-foreground">{emotion.value}%</span>
+                    { name: "Joy", value: 78, color: "bg-emotion-joy", trend: "+12%" },
+                    { name: "Confidence", value: 65, color: "bg-emotion-surprise", trend: "+8%" },
+                    { name: "Focus", value: 52, color: "bg-emotion-neutral", trend: "+5%" },
+                    { name: "Excitement", value: 34, color: "bg-emotion-complex", trend: "+15%" },
+                  ].map((emotion, index) => (
+                    <div key={emotion.name} className="space-y-2" style={{ animationDelay: `${index * 0.1}s` }}>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="font-medium">{emotion.name}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-green-400 text-xs font-mono">{emotion.trend}</span>
+                          <span className="text-muted-foreground font-mono">{emotion.value}%</span>
+                        </div>
                       </div>
-                      <div className="h-2 w-full bg-secondary/70 rounded-full overflow-hidden">
+                      <div className="h-3 w-full bg-secondary/50 rounded-full overflow-hidden backdrop-blur-sm">
                         <div 
-                          className={`h-full ${emotion.color} rounded-full`}
-                          style={{ width: `${emotion.value}%` }}
+                          className={`h-full ${emotion.color} rounded-full transition-all duration-1000 ease-out animate-shimmer`}
+                          style={{ 
+                            width: `${emotion.value}%`,
+                            background: `linear-gradient(90deg, var(--tw-gradient-stops), transparent)`
+                          }}
                         />
                       </div>
                     </div>
@@ -85,75 +108,68 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Features Section */}
-        <section className="py-16 md:py-20 relative border-t border-border">
+        {/* Enhanced Features Section */}
+        <section className="py-20 md:py-32 relative border-t border-white/10">
           <div className="container px-4 md:px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-medium mb-4">Key Features</h2>
-              <p className="text-muted-foreground text-base max-w-2xl mx-auto">
-                Our platform delivers precise emotional insights using advanced AI models
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient">Powerful Features</h2>
+              <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
+                Advanced AI technology meets intuitive design to deliver unprecedented emotional intelligence
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:translate-y-[-5px]">
-                <div className="h-12 w-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 text-primary">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 16v-4" />
-                    <path d="M12 8h.01" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-medium mb-3">Real-Time Visualization</h3>
-                <p className="text-muted-foreground text-sm">
-                  Watch emotions evolve in real-time with our advanced visualization tools that track subtle shifts in expression.
-                </p>
-              </div>
-              
-              <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:translate-y-[-5px]">
-                <div className="h-12 w-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 text-primary">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M2 12h2" />
-                    <path d="M20 12h2" />
-                    <path d="M12 2v2" />
-                    <path d="M12 20v2" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-medium mb-3">Multilingual Support</h3>
-                <p className="text-muted-foreground text-sm">
-                  Automatic language detection and translation reveal emotional patterns across cultures and languages.
-                </p>
-              </div>
-              
-              <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:translate-y-[-5px]">
-                <div className="h-12 w-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 text-primary">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 3v18h18" />
-                    <path d="M7 17l4-4 4 4 4-4" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-medium mb-3">Detailed Analytics</h3>
-                <p className="text-muted-foreground text-sm">
-                  Comprehensive reports with emotional insights and patterns over time for deeper understanding.
-                </p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: <Zap className="h-8 w-8" />,
+                  title: "Real-Time Processing",
+                  description: "Instant emotion detection with sub-second latency. Process live streams or uploaded content with lightning speed.",
+                  gradient: "from-yellow-500/20 to-orange-500/20",
+                  iconColor: "text-yellow-400"
+                },
+                {
+                  icon: <TrendingUp className="h-8 w-8" />,
+                  title: "Advanced Analytics",
+                  description: "Comprehensive emotional journey mapping with detailed insights, trends, and predictive analytics.",
+                  gradient: "from-green-500/20 to-emerald-500/20",
+                  iconColor: "text-green-400"
+                },
+                {
+                  icon: <Users className="h-8 w-8" />,
+                  title: "Multi-Person Detection",
+                  description: "Analyze multiple faces simultaneously with individual emotion tracking and group dynamics analysis.",
+                  gradient: "from-blue-500/20 to-purple-500/20",
+                  iconColor: "text-blue-400"
+                }
+              ].map((feature, index) => (
+                <Card key={feature.title} className={`glass-card border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 group animate-slide-up`} style={{ animationDelay: `${index * 0.2}s` }}>
+                  <CardHeader className="pb-4">
+                    <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${feature.gradient} border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ${feature.iconColor}`}>
+                      {feature.icon}
+                    </div>
+                    <CardTitle className="text-xl font-bold">{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
         
-        {/* Subscription Plans */}
-        <section className="py-16 md:py-24 relative border-t border-border">
-          <div className="absolute inset-0 z-0 opacity-10">
-            <div className="absolute top-40 left-[15%] w-80 h-80 rounded-full bg-primary/10 filter blur-[100px]" />
-            <div className="absolute bottom-20 right-[5%] w-96 h-96 rounded-full bg-accent/10 filter blur-[120px]" />
+        {/* Enhanced Subscription Plans */}
+        <section className="py-20 md:py-32 relative border-t border-white/10">
+          <div className="absolute inset-0 z-0 opacity-20">
+            <div className="absolute top-40 left-[15%] w-96 h-96 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 filter blur-[120px] animate-pulse-light" />
+            <div className="absolute bottom-20 right-[5%] w-80 h-80 rounded-full bg-gradient-to-l from-accent/20 to-primary/20 filter blur-[100px] animate-float" />
           </div>
           
           <div className="container px-4 md:px-6 relative z-10">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-medium mb-4">Subscription Plans</h2>
-              <p className="text-muted-foreground text-base max-w-2xl mx-auto">
-                Choose the perfect plan for your needs, from free basic analysis to enterprise-grade solutions
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient">Choose Your Plan</h2>
+              <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
+                From personal projects to enterprise solutions, we have the perfect plan for your emotional AI needs
               </p>
             </div>
             
@@ -162,19 +178,21 @@ const Index = () => {
         </section>
       </main>
       
-      <footer className="bg-secondary/30 border-t border-border py-8">
+      <footer className="glass-panel border-t border-white/10 py-12 relative z-10">
         <div className="container px-4 md:px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 bg-primary/20 border border-primary/20 rounded flex items-center justify-center text-primary font-medium">EA</div>
-              <span className="font-heading">Emotion<span className="text-primary">AI</span></span>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <div className="h-12 w-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-white font-bold shadow-lg">
+                EA
+              </div>
+              <span className="font-heading text-xl">Emotion<span className="text-gradient">AI</span></span>
             </div>
             
-            <div className="flex gap-6 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-              <a href="#" className="hover:text-foreground transition-colors">Documentation</a>
-              <a href="#" className="hover:text-foreground transition-colors">GitHub</a>
+            <div className="flex gap-8 text-sm text-muted-foreground">
+              <a href="#" className="hover:text-primary transition-colors duration-200">Privacy</a>
+              <a href="#" className="hover:text-primary transition-colors duration-200">Terms</a>
+              <a href="#" className="hover:text-primary transition-colors duration-200">Documentation</a>
+              <a href="#" className="hover:text-primary transition-colors duration-200">GitHub</a>
             </div>
             
             <p className="text-sm text-muted-foreground">
