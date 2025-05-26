@@ -111,46 +111,50 @@ const PredictionHistory = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Enhanced background with animated gradients */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5"></div>
+      <div className="noise-overlay"></div>
+      
       <Navigation />
       
-      <main className="flex-1 container py-8">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
-          <div>
-            <h1 className="text-3xl font-bold">Prediction History</h1>
-            <p className="text-muted-foreground">Review past emotion predictions and analytics</p>
+      <main className="flex-1 container py-12 relative z-10">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-12 gap-6">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-bold text-gradient">Prediction History</h1>
+            <p className="text-muted-foreground text-lg">Review past emotion predictions and analytics</p>
           </div>
           
-          <Button onClick={handleExportAll} className="flex items-center gap-2">
+          <Button onClick={handleExportAll} className="btn-primary shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300">
             <HistoryIcon className="h-4 w-4" />
             Export All As CSV
           </Button>
         </div>
         
-        <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="mb-6">
-          <TabsList>
-            <TabsTrigger value="all">All Sources</TabsTrigger>
-            <TabsTrigger value="video">Video</TabsTrigger>
-            <TabsTrigger value="text">Text</TabsTrigger>
+        <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="mb-8">
+          <TabsList className="bg-secondary/30 backdrop-blur-sm border border-white/10 p-1">
+            <TabsTrigger value="all" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300">All Sources</TabsTrigger>
+            <TabsTrigger value="video" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300">Video</TabsTrigger>
+            <TabsTrigger value="text" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300">Text</TabsTrigger>
           </TabsList>
         </Tabs>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <Card className="lg:col-span-2">
-            <CardContent className="p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          <Card className="lg:col-span-2 glass-card card-hover border-white/10">
+            <CardContent className="p-8">
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Text</TableHead>
-                    <TableHead>Emotion</TableHead>
-                    <TableHead>Source</TableHead>
+                  <TableRow className="border-white/10 hover:bg-secondary/20">
+                    <TableHead className="text-foreground font-semibold">Date</TableHead>
+                    <TableHead className="text-foreground font-semibold">Text</TableHead>
+                    <TableHead className="text-foreground font-semibold">Emotion</TableHead>
+                    <TableHead className="text-foreground font-semibold">Source</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {paginatedPredictions.map((prediction) => (
-                    <TableRow key={prediction.id}>
-                      <TableCell className="whitespace-nowrap">
+                    <TableRow key={prediction.id} className="border-white/5 hover:bg-secondary/10 transition-colors duration-200">
+                      <TableCell className="whitespace-nowrap font-medium">
                         {new Date(prediction.timestamp).toLocaleDateString()}
                       </TableCell>
                       <TableCell className="max-w-60 truncate">
@@ -162,7 +166,7 @@ const PredictionHistory = () => {
                           intensity={prediction.intensity}
                         />
                       </TableCell>
-                      <TableCell className="capitalize">
+                      <TableCell className="capitalize font-medium">
                         {prediction.source}
                       </TableCell>
                     </TableRow>
@@ -170,12 +174,12 @@ const PredictionHistory = () => {
                 </TableBody>
               </Table>
               
-              <Pagination className="mt-4">
+              <Pagination className="mt-6">
                 <PaginationContent>
                   <PaginationItem>
                     <PaginationPrevious 
                       onClick={() => setCurrentPage(p => Math.max(1, p - 1))} 
-                      className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+                      className={`${currentPage <= 1 ? "pointer-events-none opacity-50" : "hover:bg-secondary/50 transition-colors"}`}
                     />
                   </PaginationItem>
                   
@@ -184,6 +188,7 @@ const PredictionHistory = () => {
                       <PaginationLink
                         onClick={() => setCurrentPage(page)}
                         isActive={currentPage === page}
+                        className="hover:bg-secondary/50 transition-colors"
                       >
                         {page}
                       </PaginationLink>
@@ -193,7 +198,7 @@ const PredictionHistory = () => {
                   <PaginationItem>
                     <PaginationNext 
                       onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                      className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
+                      className={`${currentPage >= totalPages ? "pointer-events-none opacity-50" : "hover:bg-secondary/50 transition-colors"}`}
                     />
                   </PaginationItem>
                 </PaginationContent>
@@ -201,38 +206,38 @@ const PredictionHistory = () => {
             </CardContent>
           </Card>
           
-          <Card>
-            <CardContent className="p-6">
-              <div className="mb-4">
-                <h3 className="text-lg font-medium mb-2">Analysis Tools</h3>
-                <div className="grid grid-cols-1 gap-2">
-                  <Button variant="outline" className="justify-start">
+          <Card className="glass-card card-hover border-white/10">
+            <CardContent className="p-8">
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-4 text-gradient">Analysis Tools</h3>
+                <div className="grid grid-cols-1 gap-3">
+                  <Button variant="outline" className="justify-start btn-outline hover:bg-primary/10 hover:border-primary/30 transition-all duration-300">
                     <Sliders className="mr-2 h-4 w-4" />
                     Filter Results
                   </Button>
-                  <Button variant="outline" className="justify-start">
+                  <Button variant="outline" className="justify-start btn-outline hover:bg-primary/10 hover:border-primary/30 transition-all duration-300">
                     <BarChart className="mr-2 h-4 w-4" />
                     View Analytics
                   </Button>
                 </div>
               </div>
               
-              <div className="mt-6">
-                <h3 className="text-lg font-medium mb-2">Emotion Distribution</h3>
-                <div className="space-y-3">
+              <div className="mt-8">
+                <h3 className="text-xl font-semibold mb-4 text-gradient">Emotion Distribution</h3>
+                <div className="space-y-4">
                   {Object.entries(emotionStats).map(([emotion, count]) => (
-                    <div key={emotion} className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
+                    <div key={emotion} className="flex items-center justify-between gap-3 p-3 rounded-lg bg-secondary/20 backdrop-blur-sm border border-white/5">
+                      <div className="flex items-center gap-3">
                         <EmotionBadge
                           emotion={emotion as any}
                           intensity={0}
                         />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">{count}</span>
-                        <div className="h-2 bg-muted rounded-full w-24">
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm font-semibold">{count}</span>
+                        <div className="h-2 bg-muted rounded-full w-28 overflow-hidden">
                           <div 
-                            className="h-2 bg-primary rounded-full" 
+                            className="h-2 bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-500 ease-out" 
                             style={{ width: `${(count / filteredPredictions.length) * 100}%` }}
                           />
                         </div>
@@ -246,12 +251,12 @@ const PredictionHistory = () => {
         </div>
       </main>
       
-      <footer className="bg-card border-t py-6">
+      <footer className="bg-secondary/30 backdrop-blur-lg border-t border-white/10 py-8 relative z-10">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 bg-gradient-to-br from-primary to-accent rounded-md flex items-center justify-center text-white font-semibold">EA</div>
-              <span className="font-heading">Emotion AI</span>
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center text-white font-bold shadow-lg">EA</div>
+              <span className="font-heading text-lg">Emotion<span className="text-gradient">AI</span></span>
             </div>
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Emotion AI. All rights reserved.
