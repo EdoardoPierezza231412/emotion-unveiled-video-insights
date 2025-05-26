@@ -65,7 +65,7 @@ const Analysis = () => {
     }, 800);
     
     try {
-      const response = await fetch("http://127.0.0.1:8000/predict-any", {
+      const response = await fetch("http://194.171.191.226:3100/docs#/default/predict_endpoint_predict_any_post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
