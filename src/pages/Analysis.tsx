@@ -65,7 +65,7 @@ const Analysis = () => {
     }, 800);
     
     try {
-      const response = await fetch("http://194.171.191.226:3100/docs", {
+      const response = await fetch("http://194.171.191.226:3100", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
