@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Download, Youtube, Wand2, BarChart2, Loader2, Sparkles, ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,6 +26,9 @@ interface ApiResponse {
     input: string;
   };
 }
+
+// Use environment variable for API base URL, with a sensible fallback
+const API = process.env.REACT_APP_API_BASE_URL || "http://194.171.191.226:3100";
 
 const Analysis = () => {
   const { toast } = useToast();
@@ -65,15 +67,14 @@ const Analysis = () => {
     }, 800);
     
     try {
-      const response = await fetch("http://194.171.191.226:3100", {
+      // POST to correct analysis endpoint
+      const response = await fetch(`${API}/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-plan": selectedPlan
         },
-        body: JSON.stringify({
-          src: youtubeUrl
-        })
+        body: JSON.stringify({ src: youtubeUrl })
       });
 
       clearInterval(progressInterval);
@@ -180,7 +181,6 @@ const Analysis = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-8">
-                  <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="space-y-3">
                       <Label htmlFor="youtube-url" className="text-base font-medium">YouTube Video URL</Label>
                       <div className="relative">
