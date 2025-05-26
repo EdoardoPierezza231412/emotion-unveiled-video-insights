@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Download, Youtube, Wand2, BarChart2, Loader2, Sparkles, ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,8 +27,8 @@ interface ApiResponse {
   };
 }
 
-// Use environment variable for API base URL, with a sensible fallback
-const API = process.env.REACT_APP_API_BASE_URL || "http://194.171.191.226:3100";
+// Use Vite environment variable with a sensible fallback
+const API = import.meta.env.VITE_API_BASE_URL || "http://194.171.191.226:3100";
 
 const Analysis = () => {
   const { toast } = useToast();
