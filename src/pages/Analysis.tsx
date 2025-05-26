@@ -26,7 +26,7 @@ const planOptions = [
 
 const nextActions = (
   setTab: (val: string) => void,
-  download: () => void
+  download: () => voidz
 ) => [
   {
     title: "View Detailed Analytics",
