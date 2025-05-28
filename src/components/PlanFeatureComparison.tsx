@@ -85,14 +85,6 @@ const PlanFeatureComparison: React.FC<PlanFeatureComparisonProps> = ({ selectedP
                 <td className="py-3 px-2 text-center">30+ complete</td>
               </tr>
               
-              {/* Video Resolution */}
-              <tr className="border-b border-border">
-                <td className="py-3 px-2 text-left">Max Resolution</td>
-                <td className="py-3 px-2 text-center">720p</td>
-                <td className="py-3 px-2 text-center">4K</td>
-                <td className="py-3 px-2 text-center">8K</td>
-              </tr>
-              
               {/* Time Limit */}
               <tr className="border-b border-border">
                 <td className="py-3 px-2 text-left">Video Length</td>
@@ -101,17 +93,9 @@ const PlanFeatureComparison: React.FC<PlanFeatureComparisonProps> = ({ selectedP
                 <td className="py-3 px-2 text-center">Unlimited</td>
               </tr>
               
-              {/* Language Support */}
+              {/* Priority Support */}
               <tr className="border-b border-border">
-                <td className="py-3 px-2 text-left">Languages</td>
-                <td className="py-3 px-2 text-center">English only</td>
-                <td className="py-3 px-2 text-center">10 languages</td>
-                <td className="py-3 px-2 text-center">50+ languages</td>
-              </tr>
-              
-              {/* Advanced Features */}
-              <tr className="border-b border-border">
-                <td className="py-3 px-2 text-left">Complex Emotions</td>
+                <td className="py-3 px-2 text-left">Priority Support</td>
                 <td className="py-3 px-2 text-center">
                   <X className="h-4 w-4 mx-auto text-muted-foreground/50" />
                 </td>
@@ -123,14 +107,28 @@ const PlanFeatureComparison: React.FC<PlanFeatureComparisonProps> = ({ selectedP
                 </td>
               </tr>
               
-              {/* Cultural Analysis */}
+              {/* API Access */}
               <tr className="border-b border-border">
-                <td className="py-3 px-2 text-left">Cultural Context</td>
+                <td className="py-3 px-2 text-left">API Access</td>
                 <td className="py-3 px-2 text-center">
                   <X className="h-4 w-4 mx-auto text-muted-foreground/50" />
                 </td>
                 <td className="py-3 px-2 text-center">
                   <X className="h-4 w-4 mx-auto text-muted-foreground/50" />
+                </td>
+                <td className="py-3 px-2 text-center">
+                  <Check className="h-4 w-4 mx-auto text-primary" />
+                </td>
+              </tr>
+              
+              {/* Advanced Analytics */}
+              <tr className="border-b border-border">
+                <td className="py-3 px-2 text-left">Advanced Analytics</td>
+                <td className="py-3 px-2 text-center">
+                  <X className="h-4 w-4 mx-auto text-muted-foreground/50" />
+                </td>
+                <td className="py-3 px-2 text-center">
+                  <Check className="h-4 w-4 mx-auto text-primary" />
                 </td>
                 <td className="py-3 px-2 text-center">
                   <Check className="h-4 w-4 mx-auto text-primary" />
