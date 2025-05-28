@@ -1,6 +1,6 @@
 
 import React from "react";
-import { ArrowRight, Upload, Sparkles, Video, BarChart3 } from "lucide-react";
+import { ArrowRight, Upload, Sparkles, Video, BarChart3, Brain, Zap, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/layout/Navigation";
@@ -13,14 +13,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground relative overflow-hidden">
-      {/* Enhanced animated background */}
+      {/* Enhanced animated background with more complexity */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-[10%] w-96 h-96 rounded-full bg-gradient-to-br from-primary/20 via-accent/15 to-transparent filter blur-[120px] animate-pulse-light" />
         <div className="absolute bottom-0 left-[5%] w-80 h-80 rounded-full bg-gradient-to-tr from-accent/20 via-primary/15 to-transparent filter blur-[100px] animate-float" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 filter blur-[80px] animate-glow" />
+        <div className="absolute top-1/4 right-[20%] w-64 h-64 rounded-full bg-gradient-to-l from-green-500/15 to-blue-500/10 filter blur-[90px] animate-float" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-1/3 left-[15%] w-56 h-56 rounded-full bg-gradient-to-r from-purple-500/15 to-pink-500/10 filter blur-[100px] animate-pulse-light" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute top-2/3 right-[8%] w-48 h-48 rounded-full bg-gradient-to-br from-yellow-500/10 to-orange-500/15 filter blur-[80px] animate-glow" style={{ animationDelay: '4s' }} />
       </div>
       
-      <div className="noise-overlay opacity-30"></div>
+      <div className="noise-overlay opacity-40"></div>
       
       <Navigation />
       
@@ -78,40 +81,113 @@ const Index = () => {
                 </Button>
               </div>
               
-              {/* Enhanced Emotion Visualization Preview */}
-              <div className="w-full max-w-3xl mx-auto mt-16 glass-panel rounded-2xl p-8 animate-float shadow-2xl border border-white/10">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gradient">Emotion Analysis Preview</h3>
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                    Ready
-                  </Badge>
-                </div>
-                <div className="space-y-4">
-                  {[
-                    { name: "Joy", value: 78, color: "bg-emotion-joy", trend: "+12%" },
-                    { name: "Confidence", value: 65, color: "bg-emotion-surprise", trend: "+8%" },
-                    { name: "Focus", value: 52, color: "bg-emotion-neutral", trend: "+5%" },
-                    { name: "Excitement", value: 34, color: "bg-emotion-complex", trend: "+15%" },
-                  ].map((emotion, index) => (
-                    <div key={emotion.name} className="space-y-2" style={{ animationDelay: `${index * 0.1}s` }}>
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="font-medium">{emotion.name}</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-green-400 text-xs font-mono">{emotion.trend}</span>
-                          <span className="text-muted-foreground font-mono">{emotion.value}%</span>
+              {/* Enhanced Advanced Emotion Intelligence Preview */}
+              <div className="w-full max-w-4xl mx-auto mt-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Real-time Analysis Simulation */}
+                  <Card className="glass-panel rounded-2xl p-6 animate-float shadow-2xl border border-white/10">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-xl font-semibold text-gradient flex items-center gap-2">
+                        <Brain className="h-6 w-6" />
+                        Neural Processing
+                      </h3>
+                      <Badge className="bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-1">
+                        <Zap className="h-3 w-3" />
+                        Active
+                      </Badge>
+                    </div>
+                    <div className="space-y-4">
+                      {[
+                        { name: "Confidence", value: 92, color: "from-blue-500 to-cyan-400", trend: "+8%" },
+                        { name: "Joy", value: 78, color: "from-yellow-400 to-orange-500", trend: "+12%" },
+                        { name: "Focus", value: 65, color: "from-green-400 to-emerald-500", trend: "+5%" },
+                        { name: "Excitement", value: 45, color: "from-purple-400 to-pink-500", trend: "+15%" },
+                      ].map((emotion, index) => (
+                        <div key={emotion.name} className="space-y-2" style={{ animationDelay: `${index * 0.15}s` }}>
+                          <div className="flex justify-between items-center text-sm">
+                            <span className="font-medium flex items-center gap-2">
+                              <div className={`h-2 w-2 rounded-full bg-gradient-to-r ${emotion.color}`} />
+                              {emotion.name}
+                            </span>
+                            <div className="flex items-center gap-2">
+                              <span className="text-green-400 text-xs font-mono flex items-center gap-1">
+                                <TrendingUp className="h-3 w-3" />
+                                {emotion.trend}
+                              </span>
+                              <span className="text-muted-foreground font-mono">{emotion.value}%</span>
+                            </div>
+                          </div>
+                          <div className="h-3 w-full bg-secondary/50 rounded-full overflow-hidden backdrop-blur-sm">
+                            <div 
+                              className={`h-full bg-gradient-to-r ${emotion.color} rounded-full transition-all duration-1000 ease-out relative`}
+                              style={{ width: `${emotion.value}%` }}
+                            >
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Card>
+
+                  {/* Advanced Insights Panel */}
+                  <Card className="glass-panel rounded-2xl p-6 animate-float shadow-2xl border border-white/10" style={{ animationDelay: '0.5s' }}>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="text-xl font-semibold text-gradient flex items-center gap-2">
+                        <BarChart3 className="h-6 w-6" />
+                        Deep Insights
+                      </h3>
+                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                        AI Enhanced
+                      </Badge>
+                    </div>
+                    <div className="space-y-6">
+                      <div className="glass-card p-4 rounded-xl border border-white/10">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="h-8 w-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                            <span className="text-white text-sm font-bold">78%</span>
+                          </div>
+                          <div>
+                            <div className="font-semibold">Emotional Coherence</div>
+                            <div className="text-xs text-muted-foreground">Micro-expression alignment</div>
+                          </div>
+                        </div>
+                        <div className="h-2 bg-secondary/30 rounded-full overflow-hidden">
+                          <div className="h-full w-3/4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-shimmer" />
                         </div>
                       </div>
-                      <div className="h-3 w-full bg-secondary/50 rounded-full overflow-hidden backdrop-blur-sm">
-                        <div 
-                          className={`h-full ${emotion.color} rounded-full transition-all duration-1000 ease-out animate-shimmer`}
-                          style={{ 
-                            width: `${emotion.value}%`,
-                            background: `linear-gradient(90deg, var(--tw-gradient-stops), transparent)`
-                          }}
-                        />
+
+                      <div className="glass-card p-4 rounded-xl border border-white/10">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="h-8 w-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                            <span className="text-white text-sm font-bold">92%</span>
+                          </div>
+                          <div>
+                            <div className="font-semibold">Authenticity Score</div>
+                            <div className="text-xs text-muted-foreground">Natural expression detection</div>
+                          </div>
+                        </div>
+                        <div className="h-2 bg-secondary/30 rounded-full overflow-hidden">
+                          <div className="h-full w-[92%] bg-gradient-to-r from-green-500 to-emerald-500 rounded-full animate-shimmer" />
+                        </div>
+                      </div>
+
+                      <div className="glass-card p-4 rounded-xl border border-white/10">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="h-8 w-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+                            <span className="text-white text-sm font-bold">85%</span>
+                          </div>
+                          <div>
+                            <div className="font-semibold">Engagement Level</div>
+                            <div className="text-xs text-muted-foreground">Audience connection strength</div>
+                          </div>
+                        </div>
+                        <div className="h-2 bg-secondary/30 rounded-full overflow-hidden">
+                          <div className="h-full w-[85%] bg-gradient-to-r from-orange-500 to-red-500 rounded-full animate-shimmer" />
+                        </div>
                       </div>
                     </div>
-                  ))}
+                  </Card>
                 </div>
               </div>
 
