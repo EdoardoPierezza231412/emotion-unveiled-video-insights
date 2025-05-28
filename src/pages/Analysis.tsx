@@ -1,10 +1,15 @@
-
 import React, { useState, useEffect } from "react";
 import {
-  Download, Youtube, Wand2, BarChart2, Loader2, Sparkles, ArrowRight, CheckCircle
+  Download,
+  Youtube,
+  Wand2,
+  BarChart2,
+  Loader2,
+  Sparkles,
+  CheckCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/layout/Navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,13 +36,11 @@ const nextActions = (
 ) => [
   {
     title: "View Detailed Analytics",
-    desc: "See comprehensive emotion charts and trends",
     icon: <BarChart2 className="h-5 w-5" />,
     action: () => (window.location.href = "/history")
   },
   {
     title: "Analyze Another Video",
-    desc: "Return to input to analyze a new video",
     icon: <Youtube className="h-5 w-5" />,
     action: () => setTab("input")
   }
@@ -50,7 +53,7 @@ const Analysis: React.FC = () => {
   const [tab, setTab] = useState("input");
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [result, setResult] = useState<any>(null);
+  const [downloadLink, setDownloadLink] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading) return;
@@ -68,51 +71,94 @@ const Analysis: React.FC = () => {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!/^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\/.+/.test(url)) {
-      return toast({ variant: "destructive", title: "Invalid URL", description: "Enter a valid YouTube link." });
-    }
-    setLoading(true);
-    try {
-      const res = await fetch(`${API}/analyze`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-plan": plan },
-        body: JSON.stringify({ src: url })
+      return toast({
+        variant: "destructive",
+        title: "Invalid URL",
+        description: "Please enter a valid YouTube link."
       });
-      if (!res.ok) throw new Error(`Status ${res.status}`);
+    }
+
+    setLoading(true);
+    setDownloadLink(null);
+
+    try {
+      const payload = {
+        src: url,
+        translate: false,
+        classify: false,
+        classify_ext: false,
+        intensity: false
+      };
+      const res = await fetch(`${API}/predict-any`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-plan": plan
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        const msg = Array.isArray(err.detail)
+          ? err.detail.map((d: any) => d.msg).join(", ")
+          : err.detail || `Error ${res.status}`;
+        throw new Error(msg);
+      }
+
+      // <-- IMPORTANT: parse JSON, then extract the link
       const data = await res.json();
+      const link = data.download?.link;
+      if (!link) {
+        throw new Error("Download link not found in response");
+      }
+
       setProgress(100);
-      setResult(data);
+      setDownloadLink(link);
       setTab("results");
-      toast({ title: "Done", description: "Analysis ready." });
+      toast({ title: "Analysis Complete", description: "Your download is ready." });
     } catch (err: any) {
       reset();
       toast({ variant: "destructive", title: "Error", description: err.message });
     }
   };
 
-  const download = () => result?.download?.link && window.open(result.download.link, "_blank");
+  const download = () => downloadLink && window.open(downloadLink, "_blank");
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Navigation />
       <main className="flex-1 p-8">
         <header className="text-center mb-8">
-          <Badge className="px-4 py-1 mb-4"><Sparkles className="mr-2" />AI-Powered Analysis</Badge>
+          <Badge className="px-4 py-1 mb-4">
+            <Sparkles className="mr-2" />AI-Powered Analysis
+          </Badge>
           <h1 className="text-4xl font-bold">Video Analysis Studio</h1>
-          <p className="text-muted-foreground">Transform YouTube videos into emotional insights</p>
+          <p className="text-muted-foreground">
+            Transform YouTube videos into emotional insights
+          </p>
         </header>
+
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList>
             <TabsTrigger value="input" disabled={loading}>Input</TabsTrigger>
-            <TabsTrigger value="results" disabled={!result}>Results</TabsTrigger>
+            <TabsTrigger value="results" disabled={!downloadLink}>Results</TabsTrigger>
           </TabsList>
+
           <TabsContent value="input">
             <Card>
               <CardContent>
                 <form onSubmit={submit} className="space-y-4">
                   <div>
                     <Label htmlFor="url">YouTube URL</Label>
-                    <Input id="url" value={url} onChange={e => setUrl(e.target.value)} disabled={loading} />
+                    <Input
+                      id="url"
+                      value={url}
+                      onChange={e => setUrl(e.target.value)}
+                      disabled={loading}
+                    />
                   </div>
+
                   <RadioGroup value={plan} onValueChange={setPlan} className="flex gap-4">
                     {planOptions.map(({ id, label, price, popular }) => (
                       <label key={id} className="flex items-center gap-2">
@@ -120,33 +166,54 @@ const Analysis: React.FC = () => {
                       </label>
                     ))}
                   </RadioGroup>
+
                   <Button type="submit" disabled={loading || !url}>
-                    {loading ? <><Loader2 className="animate-spin" />{Math.round(progress)}%</> : <>Analyze <Wand2 /></>}
+                    {loading
+                      ? <>
+                          <Loader2 className="animate-spin" /> {Math.round(progress)}%
+                        </>
+                      : <>Analyze <Wand2 /></>}
                   </Button>
                   {loading && <Progress value={progress} />}
                 </form>
               </CardContent>
             </Card>
+
             <PlanFeatureComparison selectedPlan={plan} />
           </TabsContent>
+
           <TabsContent value="results">
-            {result ? (
+            {downloadLink ? (
               <Card>
                 <CardContent>
-                  <h2 className="flex items-center gap-2"><CheckCircle />Analysis Complete</h2>
-                  <Alert><AlertTitle>Success</AlertTitle><AlertDescription>Download ready</AlertDescription></Alert>
-                  <Button onClick={download}><Download />Download CSV</Button>
+                  <h2 className="flex items-center gap-2">
+                    <CheckCircle />Analysis Complete
+                  </h2>
+                  <Alert>
+                    <AlertTitle>Success</AlertTitle>
+                    <AlertDescription>Your download is ready.</AlertDescription>
+                  </Alert>
+                  <Button onClick={download}>
+                    <Download />Download CSV
+                  </Button>
                   <EmotionTierDisplay plan={plan} />
                   <div className="mt-4 space-y-2">
-                    {nextActions(setTab, download).map(({ title, desc, icon, action }) => (
-                      <Button key={title} variant="outline" onClick={action} className="w-full flex items-center gap-2">
+                    {nextActions(setTab, download).map(({ title, icon, action }) => (
+                      <Button
+                        key={title}
+                        variant="outline"
+                        onClick={action}
+                        className="w-full flex items-center gap-2"
+                      >
                         {icon}{title}
                       </Button>
                     ))}
                   </div>
                 </CardContent>
               </Card>
-            ) : <p>No results yet</p>}
+            ) : (
+              <p>No results yet</p>
+            )}
           </TabsContent>
         </Tabs>
       </main>
@@ -155,3 +222,4 @@ const Analysis: React.FC = () => {
 };
 
 export default Analysis;
+
