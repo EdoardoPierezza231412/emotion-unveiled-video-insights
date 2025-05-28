@@ -9,9 +9,6 @@ interface PlanFeatureComparisonProps {
 const PlanFeatureComparison: React.FC<PlanFeatureComparisonProps> = ({
   selectedPlan
 }) => {
-  return <Card className="glass-card border-border rounded-xl">
-      
-      
-    </Card>;
+  return;
 };
 export default PlanFeatureComparison;
