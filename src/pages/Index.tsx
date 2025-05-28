@@ -1,6 +1,6 @@
 
 import React from "react";
-import { ArrowRight, Play, Sparkles, TrendingUp, Users, Zap } from "lucide-react";
+import { ArrowRight, Upload, Sparkles, Video, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/layout/Navigation";
@@ -25,7 +25,7 @@ const Index = () => {
       <Navigation />
       
       <main className="flex-1 relative z-10">
-        {/* Hero Section */}
+        {/* Updated Hero Section */}
         <section className="py-20 md:py-32 relative">
           <div className="container px-4 md:px-6 relative z-10">
             <div className="flex flex-col items-center text-center space-y-10 max-w-4xl mx-auto">
@@ -36,16 +36,15 @@ const Index = () => {
                 </Badge>
                 
                 <h1 className="text-4xl md:text-7xl font-bold tracking-tight animate-slide-up">
-                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-shimmer">
-                    Decode Human Emotions
-                  </span>
+                  <span className="text-foreground">Welcome back!</span>
                   <br />
-                  <span className="text-foreground">with AI Precision</span>
+                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-shimmer">
+                    Ready to understand emotions deeper than ever?
+                  </span>
                 </h1>
                 
                 <p className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed animate-slide-up">
-                  Transform video content into actionable emotional insights. Our advanced AI analyzes facial expressions, 
-                  voice patterns, and linguistic cues to provide comprehensive emotion detection and analytics.
+                  Upload content or access recent results. Your insights, your control.
                 </p>
               </div>
 
@@ -53,27 +52,38 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   onClick={() => navigate("/analysis")} 
-                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-2xl hover:shadow-primary/25 transition-all duration-300 group px-8 py-4 text-lg"
+                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-2xl hover:shadow-primary/25 transition-all duration-300 group px-8 py-4 text-lg hover:scale-105"
                 >
-                  Start Free Analysis
+                  <Upload className="mr-2 h-5 w-5" />
+                  Upload Video
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="glass-card border-primary/30 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 px-8 py-4 text-lg"
+                  onClick={() => navigate("/analysis")}
+                  className="glass-card border-primary/30 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 px-8 py-4 text-lg hover:scale-105"
                 >
-                  <Play className="mr-2 h-5 w-5" />
-                  Watch Demo
+                  <Video className="mr-2 h-5 w-5" />
+                  Try Sample Video
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  onClick={() => navigate("/history")}
+                  className="glass-card border-accent/30 hover:bg-accent/10 hover:border-accent/50 transition-all duration-300 px-8 py-4 text-lg hover:scale-105"
+                >
+                  <BarChart3 className="mr-2 h-5 w-5" />
+                  Explore Dashboard
                 </Button>
               </div>
               
               {/* Enhanced Emotion Visualization Preview */}
               <div className="w-full max-w-3xl mx-auto mt-16 glass-panel rounded-2xl p-8 animate-float shadow-2xl border border-white/10">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gradient">Live Emotion Analysis</h3>
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 animate-pulse">
-                    Real-time
+                  <h3 className="text-lg font-semibold text-gradient">Emotion Analysis Preview</h3>
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                    Ready
                   </Badge>
                 </div>
                 <div className="space-y-4">
@@ -104,56 +114,13 @@ const Index = () => {
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Enhanced Features Section */}
-        <section className="py-20 md:py-32 relative border-t border-white/10">
-          <div className="container px-4 md:px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient">Powerful Features</h2>
-              <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
-                Advanced AI technology meets intuitive design to deliver unprecedented emotional intelligence
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: <Zap className="h-8 w-8" />,
-                  title: "Real-Time Processing",
-                  description: "Instant emotion detection with sub-second latency. Process live streams or uploaded content with lightning speed.",
-                  gradient: "from-yellow-500/20 to-orange-500/20",
-                  iconColor: "text-yellow-400"
-                },
-                {
-                  icon: <TrendingUp className="h-8 w-8" />,
-                  title: "Advanced Analytics",
-                  description: "Comprehensive emotional journey mapping with detailed insights, trends, and predictive analytics.",
-                  gradient: "from-green-500/20 to-emerald-500/20",
-                  iconColor: "text-green-400"
-                },
-                {
-                  icon: <Users className="h-8 w-8" />,
-                  title: "Multi-Person Detection",
-                  description: "Analyze multiple faces simultaneously with individual emotion tracking and group dynamics analysis.",
-                  gradient: "from-blue-500/20 to-purple-500/20",
-                  iconColor: "text-blue-400"
-                }
-              ].map((feature, index) => (
-                <Card key={feature.title} className={`glass-card border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 group animate-slide-up`} style={{ animationDelay: `${index * 0.2}s` }}>
-                  <CardHeader className="pb-4">
-                    <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${feature.gradient} border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ${feature.iconColor}`}>
-                      {feature.icon}
-                    </div>
-                    <CardTitle className="text-xl font-bold">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+
+              {/* Single-line feature note */}
+              <div className="mt-8">
+                <p className="text-muted-foreground text-sm italic">
+                  Empowered by privacy-safe AI. Built to analyze, learn, and evolve.
+                </p>
+              </div>
             </div>
           </div>
         </section>
