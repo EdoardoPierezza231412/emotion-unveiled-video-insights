@@ -1,0 +1,7 @@
+version: "3"
+services:
+  frontend:
+    build: .
+    ports:
+      - "3101:8000"
+    restart: always
