@@ -1,7 +1,29 @@
-version: "3"
+version: "3.8"
+
 services:
-  frontend:
-    build: .
-    ports:
-      - "3101:8000"
+  # ⬅️ your backend – already built, we just run the image
+  backend:
+    image: nlp-1-demo_app-1-emotion-api@sha256:3b587739aecb778b60144879cfe1bd6cc3bd9a3b094d4b11ad982639e6ef85c5
+    container_name: backend
+    networks: [appnet]
+    expose:            # makes port visible *inside* the network
+      - "8000"         # <- change if your backend listens elsewhere
+    # (optional) environment variables the API expects
+    environment:
+      - PORT=8000
     restart: always
+
+  # ⬅️ your Vite + Tailwind frontend
+  frontend:
+    build: .           # assumes Dockerfile at project root
+    container_name: frontend
+    networks: [appnet]
+    ports:
+      - "3101:8000"      # host_port:container_port (Nginx serves on 80)
+    environment:
+      # Vite picks this up at build-time; update key if you use another
+      - VITE_API_BASE_URL=http://backend:8000
+    restart: always
+
+networks:
+  appnet:
